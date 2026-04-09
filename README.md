@@ -1,1 +1,1 @@
-# navcheats-labs.github.io
+# Navchetas-labs.github.io
