@@ -1,1340 +1,351 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./media/navchetas_labs_logo_logo.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./media/navchetas_labs_logo_logo.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="./media/navchetas_labs_logo_logo.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <title>Navchetas Labs - AI-Driven Enterprise Solutions</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary: #0066cc;
-      --primary-dark: #0052a3;
-      --secondary: #ff6b35;
-      --text-dark: #1a1a1a;
-      --text-light: #666;
-      --bg-light: #f8f9fa;
-      --bg-white: #ffffff;
-      --accent: #00d4ff;
-      --success: #10b981;
-      --gradient: linear-gradient(135deg, #0066cc 0%, #00d4ff 100%);
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.6;
-      color: var(--text-dark);
-      background: var(--bg-white);
-    }
-
-    /* Navigation */
-    nav {
-      background: var(--bg-white);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
-
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      transition: color 0.3s;
-      cursor: pointer;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .nav-logo-img {
-      height: 100px;
-      width: auto;
-      margin-left: 2rem;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    .nav-logo-img:hover {
-      transform: scale(1.1);
-    }
-
-    /* Hero Section */
-    .hero {
-      background: var(--gradient);
-      color: white;
-      padding: 6rem 2rem;
-      text-align: center;
-    }
-
-    .hero-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      font-weight: 800;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      opacity: 0.95;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background: white;
-      color: var(--primary);
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s;
-      margin: 0.5rem;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* Main Content Area */
-    .main-content {
-      display: none;
-    }
-
-    .main-content.active {
-      display: block;
-    }
-
-    /* Cards */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-
-    .card {
-      background: var(--bg-white);
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s;
-      border-top: 4px solid var(--primary);
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-
-    .card h3 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-
-    .card p {
-      color: var(--text-light);
-      line-height: 1.8;
-    }
-
-    /* Section Styling */
-    section {
-      padding: 4rem 2rem;
-    }
-
-    section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--text-dark);
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-light);
-      margin-bottom: 3rem;
-    }
-
-    /* Team Section */
-    .team-member {
-      background: var(--bg-light);
-      border-radius: 10px;
-      padding: 2rem;
-      text-align: center;
-      transition: all 0.3s;
-    }
-
-    .team-member:hover {
-      background: var(--bg-white);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .member-name {
-      font-size: 1.3rem;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .member-title {
-      color: var(--secondary);
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-
-    .member-desc {
-      color: var(--text-light);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .skill-tag {
-      background: linear-gradient(135deg, #0066cc15, #00d4ff15);
-      border: 1px solid var(--primary);
-      color: var(--primary);
-      padding: 0.7rem 1.2rem;
-      border-radius: 25px;
-      text-align: center;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-
-    .skill-tag:hover {
-      background: var(--primary);
-      color: white;
-      transform: scale(1.05);
-    }
-
-    /* Projects */
-    .project-item {
-      background: var(--bg-light);
-      border-left: 4px solid var(--secondary);
-      padding: 1.5rem;
-      margin: 1rem 0;
-      border-radius: 5px;
-      transition: all 0.3s;
-    }
-
-    .project-item:hover {
-      background: var(--bg-white);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border-left-color: var(--primary);
-    }
-
-    .project-title {
-      font-size: 1.2rem;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-    }
-
-    .project-tech {
-      color: var(--secondary);
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Metrics */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-
-    .metric {
-      text-align: center;
-      padding: 2rem;
-      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-      border-radius: 10px;
-      transition: all 0.3s;
-    }
-
-    .metric:hover {
-      background: var(--gradient);
-      color: white;
-    }
-
-    .metric-value {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .metric:hover .metric-value {
-      color: white;
-    }
-
-    .metric-label {
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-
-    .metric:hover .metric-label {
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    /* Footer */
-    footer {
-      background: var(--text-dark);
-      color: white;
-      padding: 3rem 2rem;
-      text-align: center;
-      margin-top: 4rem;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-links {
-      margin: 1rem 0;
-    }
-
-    .footer-links a {
-      color: var(--accent);
-      margin: 0 1rem;
-      text-decoration: none;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .nav-links {
-        gap: 1rem;
-        font-size: 0.9rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      section h2 {
-        font-size: 2rem;
-      }
-    }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      padding: 2rem 0;
-    }
-
-    .timeline-item {
-      padding-left: 40px;
-      padding-bottom: 2rem;
-      position: relative;
-    }
-
-    .timeline-item:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 12px;
-      height: 12px;
-      background: var(--primary);
-      border-radius: 50%;
-      border: 3px solid white;
-      box-shadow: 0 0 0 2px var(--primary);
-    }
-
-    .timeline-item:not(:last-child):after {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 12px;
-      width: 2px;
-      height: calc(100% - 12px);
-      background: var(--primary);
-    }
-
-    /* Table */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
-      background: var(--bg-white);
-    }
-
-    table th {
-      background: var(--primary);
-      color: white;
-      padding: 1rem;
-      text-align: left;
-    }
-
-    table td {
-      padding: 1rem;
-      border-bottom: 1px solid #ddd;
-    }
-
-    table tr:hover {
-      background: var(--bg-light);
-    }
-
-    /* Badge */
-    .badge {
-      display: inline-block;
-      background: var(--success);
-      color: white;
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      margin: 0.2rem;
-    }
-
-    .badge.ai {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    .badge.backend {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    }
-
-    .badge.frontend {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
-
-    .badge.devops {
-      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    }
-
-    .badge.security {
-      background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
-    }
-  </style>
-</head>
-
-<body>
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-container">
-      <img src="./media/navchetas_labs_logo.png" alt="Navchetas Labs Logo" class="nav-logo-img"
-        onclick="showSection('home')">
-      <div class="logo">Navchetas LABS</div>
-      <ul class="nav-links">
-        <li><a onclick="showSection('home')">Home</a></li>
-        <li><a onclick="showSection('about')">About</a></li>
-        <li><a onclick="showSection('team')">Team</a></li>
-        <li><a onclick="showSection('capabilities')">Capabilities</a></li>
-        <li><a onclick="showSection('projects')">Projects</a></li>
-        <li><a onclick="showSection('contact')">Contact</a></li>
-      </ul>
-
-    </div>
-  </nav>
-
-  <!-- Home Section -->
-  <div id="home" class="main-content active">
-    <div class="hero">
-      <div class="hero-content">
-        <h1>Navchetas Labs</h1>
-        <p>
-          Enterprise-Grade AI Solutions | Cloud-Native Architecture |
-          Intelligent Automation
-        </p>
-        <p style="font-size: 1.1rem; margin-top: 1rem">
-          Transforming enterprises through AI, cutting-edge DevOps, and
-          full-stack innovation
-        </p>
-        <button class="cta-button" onclick="showSection('about')">
-          Explore Our Expertise
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./media/navchetas_labs_logo_logo.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./media/navchetas_labs_logo_logo.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./media/navchetas_labs_logo_logo.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Navcheta Labs | Product Innovation and Technology Consultancy</title>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="container nav-shell">
+        <a class="brand" href="#home" aria-label="Navcheta Labs home">
+          <img src="./media/navchetas_labs_logo.png" alt="Navcheta Labs logo" />
+          <div class="brand-text">
+            <strong>Navcheta Labs</strong>
+            <span>Product Innovation and Consultancy</span>
+          </div>
+        </a>
+
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          aria-label="Open navigation menu"
+          aria-controls="siteNav"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
-        <button class="cta-button" onclick="showSection('team')" style="
-              background: transparent;
-              border: 2px solid white;
-              color: white;
-            ">
-          Meet the Team
-        </button>
-      </div>
-    </div>
 
-    <section class="container">
-      <h2>Why Navchetas Labs?</h2>
-      <p class="section-subtitle">
-        A unique fusion of AI leadership, robust infrastructure, and
-        full-stack excellence
-      </p>
-      <div class="cards-grid">
-        <div class="card">
-          <h3>🤖 AI & Data Intelligence</h3>
-          <p>
-            24+ years of enterprise AI transformation. Building generative AI
-            solutions, predictive analytics, and machine learning systems that
-            drive $100M+ business impact.
-          </p>
-        </div>
-        <div class="card">
-          <h3>⚙️ Bulletproof DevOps</h3>
-          <p>
-            11+ years of cloud mastery. 60% infrastructure cost reduction,
-            zero-downtime deployments, and enterprise-grade security across
-            1,300+ servers.
-          </p>
-        </div>
-        <div class="card">
-          <h3>🎨 Full-Stack Excellence</h3>
-          <p>
-            10+ years of crafting scalable architectures. From responsive
-            frontends to high-performance backends, dashboarding platforms to
-            real-time data visualizations.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="container" style="background: var(--bg-light)">
-      <h2>Proven Track Record</h2>
-      <div class="metrics-grid">
-        <div class="metric">
-          <div class="metric-value">35+</div>
-          <div class="metric-label">Enterprise Clients</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">45+</div>
-          <div class="metric-label">Live Products</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$250M+</div>
-          <div class="metric-label">Business Impact</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">99.99%</div>
-          <div class="metric-label">Uptime SLA</div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- About Section -->
-  <div id="about" class="main-content">
-    <section class="container" style="padding-top: 3rem">
-      <h2>About Navchetas Labs</h2>
-      <p class="section-subtitle">
-        Bridging AI Innovation, Enterprise Architecture, and DevOps Excellence
-      </p>
-
-      <h3 style="margin-top: 2rem; color: var(--primary)">Our Philosophy</h3>
-      <p>
-        Navchetas Labs represents a unique convergence of three complementary
-        expertise domains:
-        <strong>Artificial Intelligence &amp; Digital Transformation</strong>,
-        <strong>Full-Stack Software Engineering</strong>, and
-        <strong>Enterprise DevOps &amp; Cloud Infrastructure</strong>.
-      </p>
-      <p>
-        We believe that true enterprise innovation requires seamless
-        collaboration across AI strategists, architects, frontend/backend
-        engineers, and DevOps leaders. Our tri-partite model ensures:
-      </p>
-
-      <div class="cards-grid" style="margin-top: 2rem">
-        <div class="card">
-          <h3>🧠 Intelligent Systems</h3>
-          <p>
-            <strong>AI-First Strategy:</strong> Every solution is designed
-            with intelligent algorithms at its core—from predictive
-            maintenance to generative AI, digital twins to real-time anomaly
-            detection.
-          </p>
-        </div>
-        <div class="card">
-          <h3>🏗️ Scalable Architecture</h3>
-          <p>
-            <strong>Enterprise-Grade Design:</strong> Microservices,
-            cloud-native stacks, and component-based architectures that
-            support rapid product launches without compromising quality.
-          </p>
-        </div>
-        <div class="card">
-          <h3>🛡️ Production Excellence</h3>
-          <p>
-            <strong>DevOps Mastery:</strong> Automated pipelines,
-            zero-downtime deployments, 60% cost optimization, and
-            security-first practices across all environments.
-          </p>
-        </div>
-      </div>
-
-      <h3 style="margin-top: 3rem; color: var(--primary)">
-        Key Differentiators
-      </h3>
-      <table>
-        <tr>
-          <th>Dimension</th>
-          <th>Navchetas Labs Advantage</th>
-        </tr>
-        <tr>
-          <td><strong>AI Maturity</strong></td>
-          <td>
-            10+ years leading AI initiatives; Quantum ML, LLMs, Digital Twins,
-            Prescriptive Analytics
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Delivery Speed</strong></td>
-          <td>
-            Reduced product launch cycles from 3+ months to &lt;1 hour via
-            reusable components &amp; CI/CD
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Cost Optimization</strong></td>
-          <td>
-            40% infrastructure cost reduction; Proven ROI across BFSI,
-            Manufacturing, Energy sectors
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Team Leadership</strong></td>
-          <td>
-            50+ engineers mentored; Cross-border delivery across US, UK, EU,
-            and India
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Certifications</strong></td>
-          <td>
-            TOGAF, Cloud Architecture, Oracle Certified Professional, VMware
-            Certified, IIT Delhi Quantum ML
-          </td>
-        </tr>
-      </table>
-    </section>
-  </div>
-
-  <!-- Team Section -->
-  <div id="team" class="main-content">
-    <section class="container" style="padding-top: 3rem">
-      <h2>Our Founding Team</h2>
-      <p class="section-subtitle">
-        Three industry visionaries combining 45+ years of enterprise
-        technology leadership
-      </p>
-
-      <div class="cards-grid" style="margin-top: 3rem">
-        <!-- Vijay Jaiswal -->
-        <div class="card">
-          <div class="member-name">Vijay Jaiswal</div>
-          <div class="member-title">
-            Director, Digital Transformation &amp; Enterprise AI
-          </div>
-          <div style="margin: 1.5rem 0">
-            <span class="badge ai">Generative AI</span>
-            <span class="badge ai">Digital Twins</span>
-            <span class="badge ai">Predictive Analytics</span><br />
-            <span class="badge backend">Cloud Architecture</span>
-            <span class="badge backend">Data Engineering</span>
-          </div>
-          <div class="member-desc">
-            <strong>24+ years of IT leadership</strong> with 15+ years in
-            digital transformation and 10+ years spearheading AI
-            initiatives.<br /><br />
-            <strong>Career Highlights:</strong>
-            <ul style="text-align: left; margin: 1rem 0; line-height: 1.8">
-              <li>
-                Gartner Director: Led 50+ engineers, launched 10 greenfield AI
-                products in 2 years
-              </li>
-              <li>
-                QiO Technologies: Architected industrial AI solutions for
-                Rolls-Royce, McDermott, Tata
-              </li>
-              <li>$100M+ revenue impact through AI-driven products</li>
-              <li>
-                30% productivity boost &amp; 99% time-to-market reduction
-              </li>
-            </ul>
-            <strong>Expertise:</strong> Generative AI, Quantum ML (IIT Delhi),
-            Industrial IoT, Digital Twins, Predictive Maintenance, Multi-Cloud
-            (AWS/Azure/GCP), TOGAF Architect, Data Lake Architecture
-          </div>
-        </div>
-
-        <!-- Vinod Louis -->
-        <div class="card">
-          <div class="member-name">Vinod Louis</div>
-          <div class="member-title">
-            Software Architect | Full-Stack Engineer
-          </div>
-          <div style="margin: 1.5rem 0">
-            <span class="badge frontend">React/Angular</span>
-            <span class="badge frontend">D3.js Visualization</span>
-            <span class="badge backend">Node.js</span><br />
-            <span class="badge backend">Python/Java</span>
-            <span class="badge devops">Docker/Kubernetes</span>
-          </div>
-          <div class="member-desc">
-            <strong>10+ years designing scalable applications</strong> across
-            Banking, Insurance, Industrial IoT, and Data Centers.<br /><br />
-            <strong>Career Highlights:</strong>
-            <ul style="text-align: left; margin: 1rem 0; line-height: 1.8">
-              <li>
-                O9 Solutions: Software Architect for end-to-end supply chain
-                platform
-              </li>
-              <li>
-                QiO Technologies: MVP award for Foresight Sustainable Suite
-                dashboards
-              </li>
-              <li>
-                Led cross-functional teams of 10+; Built in-house data lakes
-                &amp; CI/CD frameworks
-              </li>
-              <li>
-                200+ reusable components engineered; Product launches reduced
-                to &lt;1 hour
-              </li>
-            </ul>
-            <strong>Expertise:</strong> Full-Stack Development, D3.js/Three.js
-            Visualization, Kubernetes Orchestration, IoT Dashboarding, CRUD
-            Automation, Component Architecture, Banking/Insurance UI/UX
-          </div>
-        </div>
-
-        <!-- Dipanshu Gaaur -->
-        <div class="card">
-          <div class="member-name">Dipanshu Gaaur</div>
-          <div class="member-title">
-            Associate Director, DevOps &amp; Infrastructure
-          </div>
-          <div style="margin: 1.5rem 0">
-            <span class="badge devops">Kubernetes</span>
-            <span class="badge devops">Terraform/Ansible</span>
-            <span class="badge security">AWS/GCP</span><br />
-            <span class="badge security">CI/CD Pipelines</span>
-            <span class="badge security">Security Compliance</span>
-          </div>
-          <div class="member-desc">
-            <strong>11+ years of DevOps mastery</strong> with proven expertise
-            in large-scale infrastructure, cost optimization, and security.<br /><br />
-            <strong>Career Highlights:</strong>
-            <ul style="text-align: left; margin: 1rem 0; line-height: 1.8">
-              <li>
-                Affle Associate Director: Unified DevOps across 6 global
-                business units
-              </li>
-              <li>
-                Paytm Sr. Manager: Led 10-member team, 15% cost reduction, K8s
-                migration
-              </li>
-              <li>
-                Airtel Digital: 40% infrastructure cost optimization;
-                Troubleshooter of Year (2021)
-              </li>
-              <li>
-                Birdeye: Built 9-member team from scratch; 60% cost savings; 3
-                years zero downtime
-              </li>
-            </ul>
-            <strong>Expertise:</strong> AWS/GCP/DigitalOcean, Kubernetes &amp;
-            Container Orchestration, Infrastructure as Code
-            (Terraform/Ansible/Packer), ELK Stack Monitoring, CI/CD
-            (Jenkins/GitLab/GitHub Actions), Security Compliance (ITGC), Cost
-            Optimization
-          </div>
-        </div>
-      </div>
-
-      <section style="
-            margin-top: 3rem;
-            background: var(--bg-light);
-            padding: 2rem;
-            border-radius: 10px;
-          ">
-        <h3 style="color: var(--primary); margin-bottom: 1rem">
-          Combined Excellence Metrics
-        </h3>
-        <div class="metrics-grid">
-          <div class="metric" style="background: var(--bg-white)">
-            <div class="metric-value">45+</div>
-            <div class="metric-label">Combined Years Experience</div>
-          </div>
-          <div class="metric" style="background: var(--bg-white)">
-            <div class="metric-value">150+</div>
-            <div class="metric-label">Engineers Mentored</div>
-          </div>
-          <div class="metric" style="background: var(--bg-white)">
-            <div class="metric-value">12</div>
-            <div class="metric-label">Industry Awards</div>
-          </div>
-          <div class="metric" style="background: var(--bg-white)">
-            <div class="metric-value">Fortune 500</div>
-            <div class="metric-label">Client Portfolio</div>
-          </div>
-        </div>
-      </section>
-    </section>
-  </div>
-
-  <!-- Capabilities Section -->
-  <div id="capabilities" class="main-content">
-    <section class="container" style="padding-top: 3rem">
-      <h2>Our Capabilities</h2>
-      <p class="section-subtitle">
-        End-to-end solutions spanning AI, architecture, full-stack
-        engineering, and production excellence
-      </p>
-
-      <h3 style="margin-top: 2rem; color: var(--primary)">
-        🤖 AI &amp; Intelligent Automation
-      </h3>
-      <div class="skills-grid">
-        <div class="skill-tag">Generative AI &amp; LLMs (GPT, Claude)</div>
-        <div class="skill-tag">Machine Learning &amp; Deep Learning</div>
-        <div class="skill-tag">Predictive &amp; Prescriptive Analytics</div>
-        <div class="skill-tag">Natural Language Processing</div>
-        <div class="skill-tag">Computer Vision &amp; Image Recognition</div>
-        <div class="skill-tag">Digital Twins &amp; IoT</div>
-        <div class="skill-tag">Anomaly Detection &amp; Fraud Prevention</div>
-        <div class="skill-tag">Quantum Computing &amp; ML (IIT Delhi)</div>
-      </div>
-
-      <h3 style="margin-top: 2rem; color: var(--primary)">
-        🏗️ Enterprise Architecture &amp; Backend
-      </h3>
-      <div class="skills-grid">
-        <div class="skill-tag">Microservices Architecture</div>
-        <div class="skill-tag">Cloud-Native Design (AWS, Azure, GCP)</div>
-        <div class="skill-tag">API Design &amp; Management</div>
-        <div class="skill-tag">Data Lake &amp; Warehouse Architecture</div>
-        <div class="skill-tag">Big Data Processing (Spark, Hadoop)</div>
-        <div class="skill-tag">Database Design (SQL &amp; NoSQL)</div>
-        <div class="skill-tag">Java, Python, Go, Node.js</div>
-        <div class="skill-tag">Serverless Computing</div>
-      </div>
-
-      <h3 style="margin-top: 2rem; color: var(--primary)">
-        🎨 Frontend &amp; User Experience
-      </h3>
-      <div class="skills-grid">
-        <div class="skill-tag">React &amp; Angular</div>
-        <div class="skill-tag">D3.js &amp; Three.js Visualization</div>
-        <div class="skill-tag">Responsive Web Design</div>
-        <div class="skill-tag">Interactive Dashboards</div>
-        <div class="skill-tag">Real-Time Data Visualization</div>
-        <div class="skill-tag">Mobile-First Development</div>
-        <div class="skill-tag">Performance Optimization</div>
-        <div class="skill-tag">Accessibility &amp; UX Best Practices</div>
-      </div>
-
-      <h3 style="margin-top: 2rem; color: var(--primary)">
-        ⚙️ DevOps, Infrastructure &amp; Security
-      </h3>
-      <div class="skills-grid">
-        <div class="skill-tag">Kubernetes &amp; Container Orchestration</div>
-        <div class="skill-tag">
-          Infrastructure as Code (Terraform, Ansible)
-        </div>
-        <div class="skill-tag">CI/CD Pipelines (Jenkins, GitLab, GitHub)</div>
-        <div class="skill-tag">AWS, GCP, Azure Cloud Platforms</div>
-        <div class="skill-tag">
-          Monitoring &amp; Logging (ELK, Prometheus)
-        </div>
-        <div class="skill-tag">Zero-Downtime Deployments</div>
-        <div class="skill-tag">Cost Optimization &amp; FinOps</div>
-        <div class="skill-tag">
-          Security Compliance (ISO 27001, SOC 2, GDPR)
-        </div>
-      </div>
-
-      <h3 style="margin-top: 2rem; color: var(--primary)">
-        📊 Domains &amp; Industries
-      </h3>
-      <div class="cards-grid">
-        <div class="card">
-          <h3>Banking &amp; Finance</h3>
-          <p>
-            Core banking platforms, fraud detection, credit scoring, payment
-            systems, wealth management
-          </p>
-        </div>
-        <div class="card">
-          <h3>Manufacturing &amp; Energy</h3>
-          <p>
-            Predictive maintenance, energy efficiency, asset performance
-            optimization, supply chain
-          </p>
-        </div>
-        <div class="card">
-          <h3>Insurance &amp; Risk</h3>
-          <p>
-            Policy automation, risk assessment, claims processing, digital
-            transformation
-          </p>
-        </div>
-        <div class="card">
-          <h3>Aerospace &amp; Defense</h3>
-          <p>
-            Aircraft maintenance, component lifecycle, warranty optimization,
-            digital twins
-          </p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Projects Section -->
-  <div id="projects" class="main-content">
-    <section class="container" style="padding-top: 3rem">
-      <h2>Featured Projects &amp; Achievements</h2>
-      <p class="section-subtitle">
-        Real-world impact across Fortune 500 clients and innovative startups
-      </p>
-
-      <h3 style="margin-top: 2rem; color: var(--primary); margin-bottom: 1rem">
-        🎯 AI &amp; Machine Learning Success Stories
-      </h3>
-
-      <div class="project-item">
-        <div class="project-title">
-          🛫 Rolls-Royce Aerospace Predictive Maintenance
-        </div>
-        <div class="project-tech">
-          PyTorch | RUL Estimation | IoT Integration | Digital Twins
-        </div>
-        <p>
-          <strong>Challenge:</strong> Optimize aircraft engine maintenance
-          costs and prevent warranty failures.
-        </p>
-        <p>
-          <strong>Solution:</strong> Built AI-driven Remaining Useful Life
-          (RUL) estimators for 200+ aircraft components using predictive
-          maintenance algorithms.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge ai">↓ 27% Inventory Costs</span>
-          <span class="badge ai">→ Just-In-Time Replacements</span>
-          <span class="badge ai">→ $12.8M Annual Savings</span>
-        </p>
-      </div>
-
-      <div class="project-item">
-        <div class="project-title">
-          ⚙️ Predictive Manufacturing Defect Detection (Tata Advanced
-          Technologies)
-        </div>
-        <div class="project-tech">
-          OpenCV | Deep Learning | Real-Time Detection | Energy Optimization
-        </div>
-        <p>
-          <strong>Challenge:</strong> Reduce manufacturing defects in
-          aerospace components while optimizing energy consumption.
-        </p>
-        <p>
-          <strong>Solution:</strong> Deployed computer vision models to detect
-          particle/waste anomalies and dynamically adjust power usage.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge ai">↓ 19% Electricity Costs</span>
-          <span class="badge ai">→ 0.2% PPM Defect Rate</span>
-          <span class="badge ai">→ Enhanced Quality</span>
-        </p>
-      </div>
-
-      <div class="project-item">
-        <div class="project-title">
-          🌊 McDermott International Offshore Equipment Monitoring
-        </div>
-        <div class="project-tech">
-          IoT Sensors | Apache Nifi | Azure IoT | Real-Time Forecasting | SaaS
-        </div>
-        <p>
-          <strong>Challenge:</strong> Real-time BOM forecasting for deep-sea
-          excavators across global operations.
-        </p>
-        <p>
-          <strong>Solution:</strong> Integrated QiO's Foresight Sustainability
-          Suite™ with IoT sensors and built hybrid online/offline SaaS
-          platform.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge ai">→ Synchronized 5+ Vessels</span>
-          <span class="badge ai">✓ Zero Unplanned Downtime</span>
-          <span class="badge ai">→ Real-Time Command Center</span>
-        </p>
-      </div>
-
-      <div class="project-item">
-        <div class="project-title">
-          💳 American Express Fraud Pattern Detection
-        </div>
-        <div class="project-tech">
-          LSTM | TensorFlow | Kafka | Behavioral Analysis
-        </div>
-        <p>
-          <strong>Challenge:</strong> Identify transaction fraud via
-          behavioral sequence analysis at scale.
-        </p>
-        <p>
-          <strong>Solution:</strong> Trained temporal models on 10M+
-          cardholder event streams with LSTM networks.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge ai">→ 92% Novel Fraud Detection (F1=0.89)</span>
-          <span class="badge ai">→ 18ms Latency</span>
-        </p>
-      </div>
-
-      <h3 style="margin-top: 2rem; color: var(--primary); margin-bottom: 1rem">
-        🏛️ Enterprise Architecture &amp; Product Development
-      </h3>
-
-      <div class="project-item">
-        <div class="project-title">
-          🚀 Gartner Product Acceleration Platform
-        </div>
-        <div class="project-tech">
-          Microservices | Kubernetes | ArgoCD | GitOps | Component
-          Architecture
-        </div>
-        <p>
-          <strong>Challenge:</strong> Reduce product launch cycles from 3+
-          months to under 1 hour.
-        </p>
-        <p>
-          <strong>Solution:</strong> Architected 200+ reusable components,
-          standardized APIs, implemented GitOps with Backstage &amp; ArgoCD.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge backend">→ 10 Greenfield Products in 2 Years</span>
-          <span class="badge backend">↑ 30% Developer Productivity</span>
-          <span class="badge backend">⚡ &lt;1 Hour Deployments</span>
-        </p>
-      </div>
-
-      <div class="project-item">
-        <div class="project-title">
-          📊 Data Lake &amp; Analytics Platform (QiO)
-        </div>
-        <div class="project-tech">
-          Apache Nifi | Elasticsearch | Grafana | Data Governance | Real-Time
-          Analytics
-        </div>
-        <p>
-          <strong>Challenge:</strong> Build unified data repository for
-          upstream/downstream applications with real-time insights.
-        </p>
-        <p>
-          <strong>Solution:</strong> Designed in-house data lake with smart
-          ingestion, custom Grafana plugins, and AI-powered analytics.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge backend">→ Centralized Data Access</span>
-          <span class="badge backend">→ Real-Time Dashboards</span>
-          <span class="badge backend">→ Informed Decision Making</span>
-        </p>
-      </div>
-
-      <div class="project-item">
-        <div class="project-title">
-          🏦 Digital Banking Platform (EdgeVerve)
-        </div>
-        <div class="project-tech">
-          Core Banking | Java Spring | Angular | API Ecosystem | Automation
-          Frameworks
-        </div>
-        <p>
-          <strong>Challenge:</strong> Modernize banking platform with enhanced
-          UX and streamlined workflows.
-        </p>
-        <p>
-          <strong>Solution:</strong> Built robust POCs, created automation
-          utilities, configured enterprise workflows.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge backend">→ Improved Customer Experience</span>
-          <span class="badge backend">⚡ Faster Time-to-Market</span>
-        </p>
-      </div>
-
-      <h3 style="margin-top: 2rem; color: var(--primary); margin-bottom: 1rem">
-        ⚙️ DevOps &amp; Infrastructure Excellence
-      </h3>
-
-      <div class="project-item">
-        <div class="project-title">
-          ☁️ Multi-Cloud Infrastructure Optimization (Airtel Digital)
-        </div>
-        <div class="project-tech">
-          Kubernetes | Terraform | Cost Optimization | AWS/GCP | Monitoring
-        </div>
-        <p>
-          <strong>Challenge:</strong> Optimize infrastructure costs across 5
-          critical verticals.
-        </p>
-        <p>
-          <strong>Solution:</strong> Led K8s migration, capacity planning, and
-          advanced cost optimization strategies.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge devops">↓ 40% Infrastructure Costs</span>
-          <span class="badge devops">✓ Award: Troubleshooter of Year</span>
-        </p>
-      </div>
-
-      <div class="project-item">
-        <div class="project-title">🔐 Global DevOps Governance (Affle)</div>
-        <div class="project-tech">
-          CI/CD | Security Policies | ITGC Audit | Cross-Geography
-          Standardization
-        </div>
-        <p>
-          <strong>Challenge:</strong> Establish unified DevOps standards
-          across 6 global business units.
-        </p>
-        <p>
-          <strong>Solution:</strong> Designed global policies, governance
-          framework, unified audit system.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge devops">✓ ITGC Audit Completion</span>
-          <span class="badge devops">↓ 10% Cost Reduction per Unit</span>
-          <span class="badge security">Enhanced Security Posture</span>
-        </p>
-      </div>
-
-      <div class="project-item">
-        <div class="project-title">
-          🏃 Scale Infrastructure at Speed (Paytm)
-        </div>
-        <div class="project-tech">
-          Kubernetes | IaC | CI/CD | Performance Management | 1,300+ Servers
-        </div>
-        <p>
-          <strong>Challenge:</strong> Manage rapid scaling while maintaining
-          quality and reducing costs.
-        </p>
-        <p>
-          <strong>Solution:</strong> Led 10-member team through K8s migration,
-          RCA process refinement, zero-downtime deployments.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge devops">↑ Production Uptime</span>
-          <span class="badge devops">↓ 15% Infrastructure Costs</span>
-          <span class="badge devops">✓ Zero Downtime Upgrades</span>
-        </p>
-      </div>
-
-      <div class="project-item">
-        <div class="project-title">🔒 Enterprise-Scale DevOps (Birdeye)</div>
-        <div class="project-tech">
-          AWS/GCP/DigitalOcean | ELK Stack | Terraform | Spot Instances |
-          9-Member Team
-        </div>
-        <p>
-          <strong>Challenge:</strong> Build and scale DevOps from scratch to
-          support 1,300+ servers.
-        </p>
-        <p>
-          <strong>Solution:</strong> Automated full infrastructure lifecycle,
-          implemented robust monitoring, enforced DR strategies.
-        </p>
-        <p>
-          <strong>Impact:</strong>
-          <span class="badge devops">↓ 60% Cost Reduction</span>
-          <span class="badge devops">✓ 3 Years Zero Downtime</span>
-          <span class="badge devops">→ Awards: Troubleshooter, Pride Award</span>
-        </p>
-      </div>
-    </section>
-  </div>
-
-  <!-- Contact Section -->
-  <div id="contact" class="main-content">
-    <section class="container" style="padding-top: 3rem">
-      <h2>Let's Transform Your Enterprise</h2>
-      <p class="section-subtitle">
-        Ready to unlock AI-driven innovation, scalable architecture, and
-        production excellence?
-      </p>
-
-      <div class="cards-grid" style="margin-top: 3rem">
-        <div class="card">
-          <h3>📧 Email</h3>
-          <p>Reach out to discuss your transformation journey</p>
-          <p style="
-                color: var(--primary);
-                font-weight: bold;
-                font-size: 1.1rem;
-              ">
-            contact@Navchetaslabs.com
-          </p>
-        </div>
-        <div class="card">
-          <h3>🔗 LinkedIn</h3>
-          <p>Connect with our founding team</p>
-          <div style="margin-top: 1rem">
-            <p>
-              <strong><a href="https://www.linkedin.com/in/vijay-jaiswal-ea/" target="_blank"
-                  style="color: var(--primary)">Vijay Jaiswal →</a></strong>
-            </p>
-            <p>
-              <strong><a href="https://www.linkedin.com/in/vinod-louis-a198a460/" target="_blank"
-                  style="color: var(--primary)">Vinod Louis →</a></strong>
-            </p>
-            <p>
-              <strong><a href="https://www.linkedin.com/in/dipanshu-gaaur-909b77118/" target="_blank"
-                  style="color: var(--primary)">Dipanshu Gaaur →</a></strong>
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <h3>💼 Services</h3>
-          <p>We specialize in:</p>
-          <ul style="text-align: left; line-height: 2">
-            <li>✓ AI &amp; Generative AI Strategy</li>
-            <li>✓ Enterprise Architecture Design</li>
-            <li>✓ Full-Stack Product Development</li>
-            <li>✓ Cloud Migration &amp; Optimization</li>
-            <li>✓ DevOps &amp; CI/CD Excellence</li>
-            <li>✓ Security &amp; Compliance</li>
+        <nav>
+          <ul class="nav-links" id="siteNav">
+            <li><a href="#positioning">About</a></li>
+            <li><a href="#product">Product</a></li>
+            <li><a href="#consulting">Consultancy</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#contact">Contact</a></li>
           </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero section">
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Built with clarity and capability</p>
+            <h1>
+              Professional technology execution with a healthcare product in
+              development.
+            </h1>
+            <p>
+              Navcheta Labs is building a healthcare-focused product, with
+              details to follow soon. In parallel, we work with organizations as
+              a consulting partner across AI, product engineering, cloud
+              architecture, and DevOps.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact"
+                >Schedule a Discovery Call</a
+              >
+              <a class="btn btn-outline" href="#consulting"
+                >Explore Expertise</a
+              >
+            </div>
+          </div>
+
+          <aside class="hero-visual reveal" aria-label="capability infographic">
+            <h2>Capability Snapshot</h2>
+            <p>Startup speed with enterprise-grade engineering discipline.</p>
+            <div class="ring-grid">
+              <div class="ring-card" data-progress="82">
+                <div class="ring" style="--ring-value: 82"></div>
+                <div>
+                  <strong>Product Readiness</strong>
+                  <span>Discovery, architecture, launch planning</span>
+                </div>
+              </div>
+              <div class="ring-card" data-progress="91">
+                <div class="ring" style="--ring-value: 91"></div>
+                <div>
+                  <strong>Consulting Delivery</strong>
+                  <span>AI, platform, cloud, reliability</span>
+                </div>
+              </div>
+            </div>
+            <div class="pulse-line" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </aside>
         </div>
-      </div>
-
-      <section style="
-            background: var(--bg-light);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-top: 3rem;
-            text-align: center;
-          ">
-        <h3 style="color: var(--primary); margin-bottom: 1rem">
-          Ready to Start?
-        </h3>
-        <p>
-          Whether you're building your first AI product, scaling
-          infrastructure, or transforming your enterprise architecture—Navchetas Labs
-          has the expertise to deliver.
-        </p>
-        <p style="margin-top: 1rem; color: var(--text-light)">
-          Let's build something extraordinary together.
-        </p>
       </section>
-    </section>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <p style="font-size: 1.2rem; margin-bottom: 1rem">🚀 Navchetas LABS</p>
-      <p>
-        Enterprise AI Solutions | Cloud-Native Architecture | Production
-        Excellence
-      </p>
-      <div class="footer-links">
-        <a href="#" onclick="showSection('home')">Home</a>
-        <a href="#" onclick="showSection('about')">About</a>
-        <a href="#" onclick="showSection('team')">Team</a>
-        <a href="#" onclick="showSection('capabilities')">Capabilities</a>
-        <a href="#" onclick="showSection('projects')">Projects</a>
-        <a href="#" onclick="showSection('contact')">Contact</a>
+      <section class="section" id="positioning">
+        <div class="container">
+          <h2 class="section-title reveal">Strategic Focus</h2>
+          <p class="section-subtitle reveal">
+            Navcheta Labs is advancing a healthcare product roadmap while
+            delivering consulting outcomes across AI, engineering, cloud, and
+            platform modernization.
+          </p>
+
+          <div class="positioning-grid">
+            <article class="card reveal">
+              <h3>Healthcare Product in Progress</h3>
+              <p>
+                We are actively building a healthcare product focused on
+                operational intelligence and better workflow outcomes. Full
+                feature details and roadmap communication will follow soon.
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>Consultancy Available Now</h3>
+              <p>
+                We offer advisory and delivery consulting based on proven
+                expertise in AI strategy, software architecture, full-stack
+                engineering, cloud infrastructure, and DevOps modernization.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="product">
+        <div class="container product-layout">
+          <div class="reveal">
+            <h2 class="section-title">Healthcare Product</h2>
+            <p class="section-subtitle">
+              Product details to follow soon. Current focus is on delivering
+              strong foundations for scalable and secure rollout.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Healthcare Operations</span>
+              <span class="tag">AI-Enabled Workflow</span>
+              <span class="tag">Launch Preparation</span>
+            </div>
+          </div>
+
+          <div class="roadmap reveal" aria-label="product readiness roadmap">
+            <article>
+              <h3>01</h3>
+              <p>Use-case prioritization and product design.</p>
+            </article>
+            <article>
+              <h3>02</h3>
+              <p>Architecture hardening, security, and data strategy.</p>
+            </article>
+            <article>
+              <h3>03</h3>
+              <p>
+                Pilot planning, release readiness, and go-to-market support.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="consulting">
+        <div class="container">
+          <h2 class="section-title reveal">Capabilities and Expertise</h2>
+          <p class="section-subtitle reveal">
+            A unique fusion of AI leadership, robust infrastructure, and
+            full-stack excellence.
+          </p>
+
+          <div class="skill-map reveal">
+            <article>
+              <div class="skill-head">
+                <h3>AI and Data Intelligence</h3>
+                <strong class="counter" data-counter="24" data-suffix="+ yrs"
+                  >0</strong
+                >
+              </div>
+              <div class="bar-track"><span data-fill="92"></span></div>
+            </article>
+
+            <article>
+              <div class="skill-head">
+                <h3>Bulletproof DevOps</h3>
+                <strong class="counter" data-counter="11" data-suffix="+ yrs"
+                  >0</strong
+                >
+              </div>
+              <div class="bar-track"><span data-fill="88"></span></div>
+            </article>
+
+            <article>
+              <div class="skill-head">
+                <h3>Full-Stack Excellence</h3>
+                <strong class="counter" data-counter="10" data-suffix="+ yrs"
+                  >0</strong
+                >
+              </div>
+              <div class="bar-track"><span data-fill="90"></span></div>
+            </article>
+          </div>
+
+          <div class="consulting-grid reveal">
+            <article class="card">
+              <h3>What We Deliver</h3>
+              <ul>
+                <li>
+                  Generative AI solutions, predictive analytics, and ML systems
+                </li>
+                <li>
+                  Cloud-native architecture and zero-downtime delivery patterns
+                </li>
+                <li>
+                  High-performance full-stack platforms and data-rich dashboards
+                </li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>Engagement Strengths</h3>
+              <ul>
+                <li>
+                  Technical advisory, architecture reviews, and implementation
+                  support
+                </li>
+                <li>
+                  Acceleration of product delivery with reliability and
+                  governance
+                </li>
+                <li>
+                  Consulting aligned to measurable business and operational
+                  impact
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="leadership">
+        <div class="container">
+          <h2 class="section-title reveal">Leadership Team</h2>
+          <p class="section-subtitle reveal">
+            Vijay profile is public. Vinod and Dipanshu identities remain masked
+            on this website while their expertise is represented.
+          </p>
+
+          <div class="leaders reveal">
+            <article class="leader-card">
+              <h3>Vijay Jaiswal</h3>
+              <p class="role">
+                Director, Digital Transformation and Enterprise AI
+              </p>
+              <ul>
+                <li>24+ years in enterprise technology leadership</li>
+                <li>Deep AI productization and transformation experience</li>
+                <li>Multi-region delivery and scaled engineering leadership</li>
+              </ul>
+            </article>
+
+            <article class="leader-card">
+              <h3>Lead Architect - Profile A</h3>
+              <p class="role">
+                Identity Masked | Full-Stack and Product Engineering
+              </p>
+              <ul>
+                <li>Platform architecture and scalable product design</li>
+                <li>Frontend-backend delivery across enterprise domains</li>
+                <li>Component systems, APIs, and data workflows</li>
+              </ul>
+            </article>
+
+            <article class="leader-card">
+              <h3>Infra Director - Profile B</h3>
+              <p class="role">
+                Identity Masked | Cloud, DevOps, and Reliability
+              </p>
+              <ul>
+                <li>Cloud modernization and infrastructure automation</li>
+                <li>Secure CI/CD and operational excellence</li>
+                <li>FinOps, resilience engineering, and governance</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="container contact-wrap reveal">
+          <div>
+            <h2 class="section-title">Work With Navcheta Labs</h2>
+            <p>
+              If you are exploring healthcare product partnerships or need
+              consulting support in our capability areas, we are available for
+              focused discussions.
+            </p>
+          </div>
+
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:contact@navchetaslabs.com"
+              >contact@navchetaslabs.com</a
+            >
+            <a
+              class="btn btn-outline"
+              href="https://www.linkedin.com/in/vijay-jaiswal-ea/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Connect on LinkedIn</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-shell">
+        <p>
+          <strong>Navcheta Labs</strong> | Product Innovation and Technology
+          Consultancy
+        </p>
+        <p>Copyright 2026 Navcheta Labs. All rights reserved.</p>
       </div>
-      <p style="
-            margin-top: 2rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-          ">
-        © 2026 Navchetas Labs. All rights reserved.<br />
-        Combining 45+ years of enterprise technology expertise
-      </p>
-    </div>
-  </footer>
+    </footer>
 
-  <script>
-    function showSection(sectionId) {
-      // Hide all sections
-      const sections = document.querySelectorAll('.main-content');
-      sections.forEach((section) => {
-        section.classList.remove('active');
-      });
-
-      // Show selected section
-      const selectedSection = document.getElementById(sectionId);
-      if (selectedSection) {
-        selectedSection.classList.add('active');
-        window.scrollTo(0, 0);
-      }
-    }
-
-    // Add smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-  </script>
-</body>
-
+    <script src="./script.js"></script>
+  </body>
 </html>
